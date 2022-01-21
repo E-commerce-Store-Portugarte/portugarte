@@ -1,0 +1,20 @@
+<div class="container d-flex flex-wrap product-div">
+  <div class="thumbnail" *ngIf="product$ | async; let product">
+    <div class="image-div"><img src="{{ product.image }}" alt=""></div>
+    <div class="title-div">Titulo: {{ product.title }}</div>
+    <div class="price-div">Preço: {{ product.price }}</div>
+    <div class="description-div">Descrição: {{ product.description }}</div>
+    <button type="button" class="btn btn-primary">Comprar</button>
+    <button type="button" class="btn btn-secondary" (click)="addProductToShoppingCart(product.title)">Adicionar ao carrinho</button>
+  </div>
+</div>
+
+<hr>
+
+
+
+
+
+
+
+
