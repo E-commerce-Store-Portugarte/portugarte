@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Config } from 'src/app/models/config';
+import { Product } from 'src/app/models/products.model';
 import { ConfigService } from 'src/app/services/config.service';
-
-import { Product } from '../products/product';
 
 @Component({
   selector: 'app-specific-product',
@@ -14,10 +14,9 @@ export class SpecificProductComponent implements OnInit {
 
   id: string = '';
   product$: Observable<Product> | undefined;
+  urlServer: string = this.configUrl.URL_SERVER;
   
-  shoppingCartProducts: any[] = JSON.parse(localStorage.getItem('dataSource') || '[]');
-
-  constructor(private route: ActivatedRoute, private configService: ConfigService) { }
+  constructor(private route: ActivatedRoute, private configService: ConfigService, private configUrl: Config) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -26,11 +25,8 @@ export class SpecificProductComponent implements OnInit {
     this.product$ = this.configService.getSpecificConfig(this.id);
   }
 
-  addProductToShoppingCart(product: any) {
-
-    this.shoppingCartProducts.push(product);
-    localStorage.setItem('dataSource', JSON.stringify(this.shoppingCartProducts));
-    console.log(this.shoppingCartProducts)
+  addProductToShoppingCart(product: any, amount: number) {
+    this.configService.addProductToShoppingCart(product, amount);
   }
 
 }

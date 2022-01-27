@@ -1,9 +1,11 @@
 <div class="container d-flex flex-wrap">
     <div class="thumbnail" *ngFor="let product of arrayOfProducts$ | async">
-      <div class="image-div"><img src="{{ product.image }}" alt=""></div>
-      <div class="title-div">Titulo: {{ product.title }}</div>
+      <div class="image-div"><img src="{{urlServer}}{{ product.image }}" alt=""></div>
+      <div class="title-div">Titulo: {{ product.name }}</div>
       <div class="price-div">Preço: {{ product.price }}</div>
       <div class="description-div">Descrição: {{ product.description }}</div>
       <button type="button" class="btn btn-primary" (click)="productProfile(product.id)">Comprar</button>
     </div>
 </div>
+
+

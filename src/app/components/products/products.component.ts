@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Config } from 'src/app/models/config';
 import { ConfigService } from 'src/app/services/config.service';
 
-import { Product } from './product';
 
 @Component({
   selector: 'app-products',
@@ -12,15 +11,20 @@ import { Product } from './product';
 })
 export class ProductsComponent implements OnInit {
 
-  arrayOfProducts$: Observable<Product[]> = this.configService.getConfig();
+  arrayOfProducts$: any = this.configService.getConfig();
+  
+  urlServer: string = this.configUrl.URL_SERVER;
 
-  constructor(private configService: ConfigService, private router: Router) { }
+
+  constructor(private configService: ConfigService, private router: Router, private configUrl: Config) { }
 
   ngOnInit(): void {
-  }
+   }
 
   productProfile(i: string) {
     this.router.navigate(['products', i]);
   }
+
+
 
 }
