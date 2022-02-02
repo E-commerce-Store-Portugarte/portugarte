@@ -103,6 +103,18 @@ export class ConfigService {
       };
   }
 
+  loginUser(form: FormGroup) {
+    this.http
+      .post(this.configUrlLogin, form, { withCredentials: true })
+      .subscribe((res: any) => {
+        localStorage.setItem('token', res.key);
+        this.router.navigate(['navigation']);
+      }),
+      (err: any) => {
+        console.log(err);
+      };
+  }
+
   submitProduct(form: any) {
     this.http.post(this.config.URL_SERVER, form, this.token);
     this.router.navigate(['navigation']);

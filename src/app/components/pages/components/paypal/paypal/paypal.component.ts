@@ -33,7 +33,7 @@ export class PaypalComponent implements OnInit {
   ngOnInit(): void {
     axios.get(this.configService.configUrlPost, { headers: { Authorization: this.authorization } }).then(r => {
       this.cartData = r.data
-      this.cartData.map((item: any) => { this.endPrice += item.price * item.amount; this.cartCount += item.amount } )
+      this.cartData.map((item: any) => { this.endPrice += item.price; } )
     });
   }
 
