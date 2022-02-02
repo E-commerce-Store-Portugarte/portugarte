@@ -12,12 +12,14 @@ import { Product } from '../models/products.model';
 })
 export class ConfigService {
   configUrl = this.config.URL_SERVER + '/api/v1/products/';
+  configUrlBasic = this.config.URL_SERVER;
   configUrlPost = this.config.URL_SERVER + '/api/v1/basket-items/';
   configUrlLogin = this.config.URL_SERVER + '/rest-auth/login/';
   configUrlCheckout = this.config.URL_SERVER + '/api/v1/orders/';
   configUrlRegistration = this.config.URL_SERVER + '/rest-auth/registration/';
   configUrlImage = this.config.URL_SERVER + '/admin/api/v1/products/';
   configUrlLoginAdmin = this.config.URL_SERVER + '/admin/api/v1/login/';
+  configUrlPaypalOrder = this.config.URL_SERVER + '/api/v1/paypal/orders/';
   configUpdateProduct = '';
   configDeleteProduct = '';
 
@@ -75,18 +77,11 @@ export class ConfigService {
   }
 
   deleteItemFromShoppingCart(id: any) {
-    this.http.delete(this.configUrlPost + id + '/', this.httpOptions).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err.message);
-      }
-    );
+    return this.http.delete(this.configUrlPost + id + '/', this.httpOptions);
   }
 
   updateShoppingCartItemAmount(id: any, amount: any) {
-    this.http
+    return this.http
       .put(
         this.configUrlPost + id + '/',
         {
@@ -94,14 +89,6 @@ export class ConfigService {
         },
         this.httpOptions
       )
-      .subscribe(
-        (res) => {
-          this.getShoppingCartProducts();
-        },
-        (err) => {
-          console.log(err.message);
-        }
-      );
   }
 
   login(form: FormGroup) {
