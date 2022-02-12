@@ -1,0 +1,30 @@
+<a
+  href="#"
+  routerLink="../add-products"
+>
+  <h1>Add Products</h1>
+</a>
+<hr>
+<div class="container d-flex flex-wrap">
+  <div
+    class="thumbnail"
+    *ngFor="let product of updatedArrayOfProducts$ | async"
+  >
+    <div class="image-div"><img
+        src="{{urlServer}}{{ product.image }}"
+        alt=""
+      ></div>
+    <div class="title-div">Titulo: {{ product.name}}</div>
+    <div class="price-div">Preço: {{ product.price }}</div>
+    <div class="description-div">Descrição: {{ product.description }}</div>
+    <button
+      type="button"
+      class="btn btn-warning"
+    >Editar</button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="deleteProduct(product.id)"
+    >Apagar</button>
+  </div>
+</div>

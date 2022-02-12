@@ -1,36 +1,40 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AddProductsComponent } from './components/admin/add-products/add-products.component';
-import { EditProductComponent } from './components/admin/edit-product/edit-product.component';
-import { LoginComponent } from './components/admin/login/login.component';
-import { NavigationComponent } from './components/admin/navigation/navigation.component';
-import { RegisterComponent } from './components/admin/register/register.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-import { LandingPageComponent } from './components/pages/components/landing-page/landing-page/landing-page.component';
-import { PaypalComponent } from './components/pages/components/paypal/paypal/paypal.component';
-import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
-import { SpecificProductModule } from './components/specific-product/specific-product.module';
+import { LoginComponent } from './core/authentication/login/login.component';
+import { NavigationComponent } from './core/authentication/navigation/navigation.component';
+import { RegisterComponent } from './core/authentication/register/register.component';
+import { PaypalComponent } from './modules/checkout/paypal/paypal.component';
+import { LandingPageComponent } from './modules/landing-page/landing-page.component';
+import { AddProductsComponent } from './modules/products/add/add-products.component';
+import { EditProductComponent } from './modules/products/edit/edit-product.component';
+import { ProductsComponent } from './modules/products/list/products.component';
+import { SpecificProductModule } from './modules/products/profile/specific-product.module';
+import { ShoppingCartComponent } from './modules/products/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent  },
-  { path: 'navigation', component: NavigationComponent }, 
-  { path: 'checkout', component: CheckoutComponent }, 
-  { path: 'basket-item', component: ShoppingCartComponent }, 
-  { path: 'login', component: LoginComponent }, 
+  { path: '', component: LandingPageComponent },
+  { path: 'navigation', component: NavigationComponent },
+  { path: 'basket-item', component: ShoppingCartComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'add-products', component: AddProductsComponent },
   { path: 'edit-product/:id', component: EditProductComponent },
   { path: 'paypal', component: PaypalComponent },
-  { path: 'products/:id', 
-  loadChildren: () => import('./components/specific-product/specific-product.module').then(m => m.SpecificProductModule)
- },
+  { path: 'mercadinho', component: ProductsComponent },
+  {
+    path: 'products/:id',
+    loadChildren: () =>
+      import('./modules/products/profile/specific-product.module').then(
+        (m) => m.SpecificProductModule
+      ),
+  },
 ];
 
-SpecificProductModule
+SpecificProductModule;
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
