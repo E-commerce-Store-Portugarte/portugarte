@@ -9,6 +9,7 @@ import { LoginComponent } from './core/authentication/login/login.component';
 import { RegisterComponent } from './core/authentication/register/register.component';
 import { FooterComponentComponent } from './core/footer/footer-component.component';
 import { HeaderComponent } from './core/header/navbar.component';
+import { ContactComponent } from './modules/contact/contact.component';
 import { PagesModule } from './modules/pages.module';
 import { AddProductsComponent } from './modules/products/add/add-products.component';
 import { EditProductComponent } from './modules/products/edit/edit-product.component';
@@ -22,6 +23,7 @@ import { EditProductComponent } from './modules/products/edit/edit-product.compo
     EditProductComponent,
     FooterComponentComponent,
     HeaderComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,

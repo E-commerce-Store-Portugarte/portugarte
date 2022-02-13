@@ -1,11 +1,34 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-<div class="form-group">
-  <label for="username">Username</label>
-  <input type="text" name="username" formControlName="username">
+<div class="hero-area hero-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 offset-lg-2 text-center">
+        <div class="hero-text">
+          <div class="hero-text-tablecell">
+            <form
+              [formGroup]="loginForm"
+              (ngSubmit)="login()"
+            >
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  name="username"
+                  formControlName="username"
+                >
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  formControlName="password"
+                >
+              </div>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="form-group">
-  <label for="password">Password</label>
-  <input type="password" name="password" formControlName="password">
-</div>
-<button type="submit">Submit</button>
-</form>

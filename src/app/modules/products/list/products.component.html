@@ -1,19 +1,31 @@
-<div class="container d-flex flex-wrap">
-  <div
-    class="thumbnail"
-    *ngFor="let product of arrayOfProducts$ | async"
-  >
-    <div class="image-div"><img
-        src="{{urlServer}}{{ product.image }}"
-        alt=""
-      ></div>
-    <div class="title-div">Titulo: {{ product.name }}</div>
-    <div class="price-div">Preço: {{ product.price }}</div>
-    <div class="description-div">Descrição: {{ product.description }}</div>
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="productProfile(product.id)"
-    >Comprar</button>
+<div class="hero-area hero-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 offset-lg-2 text-center">
+        <div class="hero-text">
+          <div class="hero-text-tablecell">
+            <div class="container d-flex flex-wrap">
+              <div
+                class="thumbnail"
+                *ngFor="let product of arrayOfProducts$ | async"
+              >
+                <div class="image-div"><img
+                    src="{{urlServer}}{{ product.image }}"
+                    alt=""
+                  ></div>
+                <div class="title-div">Titulo: {{ product.name }}</div>
+                <div class="price-div">Preço: {{ product.price }}</div>
+                <div class="description-div">Descrição: {{ product.description }}</div>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="productProfile(product.id)"
+                >Comprar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
