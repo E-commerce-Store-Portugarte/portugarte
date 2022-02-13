@@ -12,6 +12,7 @@ import { EditProductComponent } from './modules/products/edit/edit-product.compo
 import { ProductsComponent } from './modules/products/list/products.component';
 import { SpecificProductModule } from './modules/products/profile/specific-product.module';
 import { ShoppingCartComponent } from './modules/products/shopping-cart/shopping-cart.component';
+import { SearchComponent } from './modules/search/search.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'paypal', component: PaypalComponent },
   { path: 'mercadinho', component: ProductsComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'search', component: SearchComponent },
   {
     path: 'products/:id',
     loadChildren: () =>
