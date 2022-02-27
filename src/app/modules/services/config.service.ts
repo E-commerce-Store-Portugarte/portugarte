@@ -20,7 +20,7 @@ export class ConfigService {
   urlImage = environment.apiUrl + '/admin/api/v1/products/';
   urlLoginAdmin = environment.apiUrl + '/admin/api/v1/login/';
   urlPaypalOrder = environment.apiUrl + '/api/v1/paypal/orders/';
-  urlsendMessage = environment.apiUrl + '/api/v1/message/';
+  urlsendMessage = environment.apiUrl + '/api/v1/support-tickets/';
   configUpdateProduct = '';
   configDeleteProduct = '';
 
@@ -138,6 +138,6 @@ export class ConfigService {
   }
 
   sendMessage(message: FormData): Observable<any> {
-    return this.http.put(this.urlsendMessage, message);
+    return this.http.post(this.urlsendMessage, message);
   }
 }

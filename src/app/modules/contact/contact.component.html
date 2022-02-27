@@ -5,13 +5,14 @@
         <div class="hero-text">
           <div class="hero-text-tablecell">
             <div class="container">
-              <form action="/action_page.php">
+              <form [formGroup]="contactForm">
                 <label for="fname">Nome</label>
                 <input
                   type="text"
                   id="fname"
                   name="firstname"
                   placeholder="O teu nome aqui..."
+                  formControlName="name"
                 >
                 <br>
                 <label for="subject">Mensagem</label>
@@ -20,11 +21,13 @@
                   name="subject"
                   placeholder="O que nos queres dizer?"
                   style="height:200px"
+                  formControlName="message"
                 ></textarea>
                 <br>
                 <input
                   type="submit"
                   value="Enviar"
+                  (click)="sendMessage()"
                 >
               </form>
             </div>

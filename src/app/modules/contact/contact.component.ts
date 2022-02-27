@@ -17,6 +17,7 @@ export class ContactComponent {
   constructor(private configService: ConfigService) {}
 
   sendMessage() {
+    console.log('ENVIOU A MSG', this.contactForm.getRawValue());
     this.configService.sendMessage(this.contactForm.getRawValue()).subscribe({
       next: (v: any) => console.log(v),
     });

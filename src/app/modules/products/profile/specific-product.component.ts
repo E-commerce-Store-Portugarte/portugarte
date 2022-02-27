@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/core/authentication/auth.service';
 import { Product } from 'src/app/modules/products/products.model';
 import { ConfigService } from 'src/app/modules/services/config.service';
 
@@ -18,7 +19,9 @@ export class SpecificProductComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private userAuthenticationService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -29,14 +32,28 @@ export class SpecificProductComponent implements OnInit {
   }
 
   addProductToShoppingCart(product: any, amount: number) {
-    console.log('wwww');
-    this.configService.addProductToShoppingCart(product, amount).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err.message);
-      }
-    );
+    if (!localStorage.getItem('token')) {
+      console.log(this.userAuthenticationService.currentUserValue);
+      alert('you are not logged in');
+    } else {
+      console.log('wwww');
+      this.configService.addProductToShoppingCart(product, amount).subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (err) => {
+          console.log(err.message);
+        }
+      );
+    }
+  }
+
+  navigateToShoppingCart() {
+    if (!localStorage.getItem('token')) {
+      console.log('TOKEN==>', this.userAuthenticationService.currentUserValue);
+      alert('you are not logged in');
+    } else {
+      this.router.navigate(['shopping-cart']);
+    }
   }
 }

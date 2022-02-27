@@ -5,12 +5,12 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  currentUserSubject = new BehaviorSubject<any>(localStorage.getItem('token'));
-  currentUser = this.currentUserSubject.asObservable();
+  currentUserSubject$ = new BehaviorSubject<any>(localStorage.getItem('token'));
+  currentUser$ = this.currentUserSubject$.asObservable();
 
   constructor() {}
 
   public get currentUserValue(): any {
-    return this.currentUserSubject.value;
+    return this.currentUserSubject$.value;
   }
 }
