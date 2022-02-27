@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './core/authentication/login/login.component';
 import { NavigationComponent } from './core/authentication/navigation/navigation.component';
 import { RegisterComponent } from './core/authentication/register/register.component';
-import { PaypalComponent } from './modules/checkout/paypal/paypal.component';
+import { PaypalComponent } from './modules/checkout/paypal.component';
 import { ContactComponent } from './modules/contact/contact.component';
 import { LandingPageComponent } from './modules/landing-page/landing-page.component';
 import { AddProductsComponent } from './modules/products/add/add-products.component';

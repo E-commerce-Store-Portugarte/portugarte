@@ -10,7 +10,10 @@
               [formGroup]="loginForm"
               (ngSubmit)="login()"
             >
-              <div class="form-group">
+              <div
+                class="form-group"
+                *ngIf="!isLogged"
+              >
                 <label for="exampleInputEmail1">
                   <h3>Email ou Username</h3>
                 </label>
@@ -23,7 +26,10 @@
                   placeholder="Enter email"
                 >
               </div>
-              <div class="form-group">
+              <div
+                class="form-group"
+                *ngIf="!isLogged"
+              >
                 <label for="exampleInputPassword1">
                   <h3>Password</h3>
                 </label>
@@ -36,15 +42,16 @@
                 >
               </div>
               <input
+                *ngIf="!isLogged"
                 type="submit"
                 class="btn btn-primary"
                 value="Entrar"
               >
             </form>
             <p></p>
-            <hr>
             <p></p>
             <input
+              *ngIf="isLogged"
               type="submit"
               (click)="logout()"
               class="btn btn-primary"

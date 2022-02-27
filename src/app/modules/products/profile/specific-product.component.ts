@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/modules/products/products.model';
 import { ConfigService } from 'src/app/modules/services/config.service';
+import Swal from 'sweetalert2';
 
 import { environment } from '../../../../environments/environment';
 
@@ -46,5 +47,9 @@ export class SpecificProductComponent implements OnInit {
 
   navigateToShoppingCart() {
     this.router.navigate(['shopping-cart']);
+  }
+
+  message(product: any) {
+    Swal.fire(product + ' foi adicionado ao carrinho de compras!');
   }
 }

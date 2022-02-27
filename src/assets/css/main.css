@@ -85,6 +85,58 @@ h1,
   line-height: 4rem;
 }
 
+.popup {
+  background: white;
+  padding: 0.2rem;
+  opacity: 0.8;
+  box-shadow: 0 0 12px 0.4px black;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  position: fixed;
+  top: 20px;
+  right: -320px;
+}
+
+#action {
+  padding: 0.5rem;
+  background: #c14953;
+  cursor: pointer;
+  transition: 0.7s;
+  color: #e5dcc5;
+  font-size: 2rem;
+}
+#action:hover {
+  color: #c14953;
+  background: #e5dcc5;
+}
+.swag {
+  right: 30px;
+  animation: anim 3s;
+}
+.opacity {
+  transition: 0.8s;
+  opacity: 0;
+}
+
+.paypal {
+  margin-top: 100px;
+}
+
+.footer-bottom {
+  margin-bottom: 700px;
+}
+
+@keyframes anim {
+  from {
+    right: -320px;
+  }
+  to {
+    right: 30px;
+  }
+}
+
 @media only screen and (max-width: 767.96px) {
   h1,
   .h1 {
@@ -643,8 +695,15 @@ nav.main-menu > ul li:last-child {
   max-width: 150px;
 }
 
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .site-logo {
+    float: left;
+    max-width: 150px;
+  }
+}
+
 ul.sub-menu li:last-child {
-  float: none !important;
+  float: left !important;
 }
 
 .mean-container .mean-bar {

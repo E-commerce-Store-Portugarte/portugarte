@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ConfigService } from 'src/app/modules/services/config.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -20,6 +21,16 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   submit() {
-    this.http.submitRegistration(this.productForm.getRawValue());
+    this.http.submitRegistration(this.productForm.getRawValue()).subscribe({
+      next: () => {
+        Swal.fire(
+          'Registo okapa! Vai agora ao teu e-mail para confirmar a situação!'
+        );
+      },
+      error: () => {
+        Swal.fire('Erro no registo! Sorry! Tenta outra vez!');
+      },
+      complete: () => console.info('complete'),
+    });
   }
 }

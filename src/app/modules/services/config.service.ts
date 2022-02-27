@@ -102,12 +102,7 @@ export class ConfigService {
   }
 
   submitRegistration(form: any) {
-    console.log('LOGIN');
-    this.http.post(this.urlRegistration, form).subscribe({
-      next: (v) => console.log(v),
-      error: (v) => console.log(v),
-      complete: () => console.info('complete'),
-    });
+    return this.http.post(this.urlRegistration, form);
   }
 
   uploadImage(form: FormData) {

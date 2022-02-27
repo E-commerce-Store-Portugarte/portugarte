@@ -23,7 +23,7 @@
                     *ngIf="isLogged"
                     type="button"
                     class="btn btn-secondary btn-block"
-                    (click)="addProductToShoppingCart(product.id, product.price)"
+                    (click)="addProductToShoppingCart(product.id, product.price); message(product.name)"
                   >
                     <h6>Adicionar ao carrinho</h6>
                   </button>
@@ -45,12 +45,25 @@
                   >
                     <h6>Checkout</h6>
                   </button>
-                  <button
+                  <p></p>
+                  <hr *ngIf="!isLogged">
+                  <p></p>
+                  <h4 *ngIf="!isLogged">Queres comprar este item?</h4>
+                  <input
                     *ngIf="!isLogged"
                     routerLink="/login"
+                    type="submit"
+                    value=" Faz login"
                   >
-                    Queres comprar este item? Faz login ou regista-te!
-                  </button>
+                  <p></p>
+                  <h4 *ngIf="!isLogged">ou</h4>
+                  <input
+                    *ngIf="!isLogged"
+                    routerLink="/register"
+                    type="submit"
+                    value="Regista-te!"
+                  >
+
                 </div>
                 <div class="card-footer text-muted">
                   <h6>Arte Independente Portuguesa</h6>

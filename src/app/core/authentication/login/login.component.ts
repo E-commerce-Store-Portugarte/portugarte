@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfigService } from 'src/app/modules/services/config.service';
+import Swal from 'sweetalert2';
 
 import { AuthService } from '../auth.service';
 
@@ -16,13 +17,19 @@ export class LoginComponent implements OnInit {
     password: new FormControl(),
   });
 
+  isLogged: boolean = false;
+
   constructor(
     private configService: ConfigService,
     private router: Router,
     private auth: AuthService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (localStorage.getItem('token')) {
+      this.isLogged = true;
+    }
+  }
 
   login() {
     this.configService
@@ -31,6 +38,10 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', res.key);
         this.auth.setCurrentUser = localStorage.getItem('token');
         this.router.navigate(['mercadinho']);
+        this.isLogged = true;
+        Swal.fire(
+          'Login efectuado com sucesso! Vais passar agora para o mercadinho!'
+        );
       }),
       (err: any) => {
         console.log(err);
@@ -39,6 +50,7 @@ export class LoginComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
-    alert('User is logged out');
+    this.isLogged = false;
+    Swal.fire('Logout efectuado com sucesso!');
   }
 }
