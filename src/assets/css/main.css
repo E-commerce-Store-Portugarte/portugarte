@@ -138,6 +138,35 @@ h1,
 }
 
 @media only screen and (max-width: 767.96px) {
+  /* .site-logo {
+    display: none;
+  } */
+
+  .footer-div {
+    display: none;
+  }
+
+  .bg-router-outlet {
+    height: 100%;
+    background-color: orange;
+  }
+
+  .responsive-list-div {
+    margin-top: 200px;
+  }
+
+  .responsive-shopping-div {
+    margin-top: 150px;
+  }
+
+  .responsive-register-div {
+    margin-top: 70px;
+  }
+
+  .responsive-center {
+    margin: auto;
+  }
+
   h1,
   .h1 {
     font-size: 3rem;
@@ -1447,7 +1476,7 @@ a.mobile-show.search-bar-icon:hover {
 
 /* -----------------------------------------------------------------------------
 
-# Hero Styles
+# Styles
 
 ----------------------------------------------------------------------------- */
 .carrinho {

@@ -35,7 +35,7 @@ export class ShoppingCartComponent {
       .deleteItemFromShoppingCart(id)
       .pipe(tap(() => this.shoppingCartSubject$.next(true)))
       .subscribe({
-        next: (v) => console.log(v),
+        next: (v) => console.log('OBJECTO DO BACKEND', v),
         error: (v) => console.log(v),
         complete: () => console.info('complete'),
       });
