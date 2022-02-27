@@ -13,4 +13,8 @@ export class AuthService {
   public get currentUserValue(): any {
     return this.currentUserSubject$.value;
   }
+
+  public set setCurrentUser(data: any) {
+    this.currentUserSubject$.next(data);
+  }
 }

@@ -6,29 +6,34 @@
           <div class="hero-text-tablecell">
             <div class="container">
               <form [formGroup]="contactForm">
-                <label for="fname">Nome</label>
-                <input
-                  type="text"
-                  id="fname"
-                  name="firstname"
-                  placeholder="O teu nome aqui..."
-                  formControlName="name"
-                >
-                <br>
-                <label for="subject">Mensagem</label>
-                <textarea
-                  id="subject"
-                  name="subject"
-                  placeholder="O que nos queres dizer?"
-                  style="height:200px"
-                  formControlName="message"
-                ></textarea>
-                <br>
-                <input
-                  type="submit"
-                  value="Enviar"
-                  (click)="sendMessage()"
-                >
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">
+                    <h3>Email</h3>
+                  </label>
+                  <input
+                    formControlName="name"
+                    type="email"
+                    class="form-control"
+                    id="exampleFormControlInput1"
+                  >
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">
+                    <h3>Mensagem</h3>
+                  </label>
+                  <textarea
+                    formControlName="message"
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                  ></textarea>
+                  <br>
+                  <input
+                    type="submit"
+                    value="Enviar"
+                    (click)="sendMessage()"
+                  >
+                </div>
               </form>
             </div>
           </div>

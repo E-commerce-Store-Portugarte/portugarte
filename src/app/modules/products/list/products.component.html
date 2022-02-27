@@ -4,25 +4,38 @@
       <div class="col-lg-9 offset-lg-2 text-center">
         <div class="hero-text">
           <div class="hero-text-tablecell">
-            <div class="container d-flex flex-wrap">
+
+
+
+            <div class="card-deck">
               <div
-                class="thumbnail"
+                class="card bg-dark"
+                style="width: 18rem;"
                 *ngFor="let product of arrayOfProducts$ | async"
               >
-                <div class="image-div"><img
-                    src="{{urlServer}}{{ product.image }}"
-                    alt=""
-                  ></div>
-                <div class="title-div">Titulo: {{ product.name }}</div>
-                <div class="price-div">Preço: {{ product.price }}</div>
-                <div class="description-div">Descrição: {{ product.description }}</div>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  (click)="productProfile(product.id)"
-                >Detalhes do Produto</button>
+                <img
+                  width="200px"
+                  height="200px"
+                  class="card-img-top"
+                  src="{{ product.image }}"
+                  alt="Card image cap"
+                >
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <p class="card-text"></p>
+                  <h6>{{ product.description }}</h6>
+                  <input
+                    class="btn btn-primary"
+                    (click)="productProfile(product.id)"
+                    value="Detalhes"
+                    type="submit"
+                  >
+                </div>
               </div>
+
+
             </div>
+
           </div>
         </div>
       </div>

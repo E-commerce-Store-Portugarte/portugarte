@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Product } from '../products/products.model';
 import { environment } from './../../../environments/environment';
@@ -26,7 +26,19 @@ export class ConfigService {
 
   token: any = '';
 
+  _isUserLogged$ = new BehaviorSubject<any>('false');
+  _isUserLoggedObservable$: Observable<boolean> =
+    this._isUserLogged$.asObservable();
+
   constructor(private http: HttpClient, private router: Router) {}
+
+  set setIsUserLogged(boolean: any) {
+    this._isUserLogged$.next(boolean);
+  }
+
+  get isUserLogged(): any {
+    return this._isUserLoggedObservable$;
+  }
 
   getConfig(): Observable<any> {
     return this.http.get(this.urlProducts);
@@ -60,15 +72,7 @@ export class ConfigService {
   }
 
   login(form: FormGroup) {
-    this.http
-      .post(this.urlLogin, form, { withCredentials: true })
-      .subscribe((res: any) => {
-        localStorage.setItem('token', res.key);
-        this.router.navigate(['mercadinho']);
-      }),
-      (err: any) => {
-        console.log(err);
-      };
+    return this.http.post(this.urlLogin, form, { withCredentials: true });
   }
 
   loginUser(form: FormGroup) {

@@ -4,28 +4,52 @@
       <div class="col-lg-9 offset-lg-2 text-center">
         <div class="hero-text">
           <div class="hero-text-tablecell">
+
+
             <form
               [formGroup]="loginForm"
               (ngSubmit)="login()"
             >
               <div class="form-group">
-                <label for="username">Username</label>
+                <label for="exampleInputEmail1">
+                  <h3>Email ou Username</h3>
+                </label>
                 <input
-                  type="text"
-                  name="username"
                   formControlName="username"
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
                 >
               </div>
               <div class="form-group">
-                <label for="password">Password</label>
+                <label for="exampleInputPassword1">
+                  <h3>Password</h3>
+                </label>
                 <input
-                  type="password"
-                  name="password"
                   formControlName="password"
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                  placeholder="Password"
                 >
               </div>
-              <button type="submit">Submit</button>
+              <input
+                type="submit"
+                class="btn btn-primary"
+                value="Entrar"
+              >
             </form>
+            <p></p>
+            <hr>
+            <p></p>
+            <input
+              type="submit"
+              (click)="logout()"
+              class="btn btn-primary"
+              value="Logout"
+            >
           </div>
         </div>
       </div>
