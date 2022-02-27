@@ -29,6 +29,14 @@ export class SpecificProductComponent implements OnInit {
   }
 
   addProductToShoppingCart(product: any, amount: number) {
-    this.configService.addProductToShoppingCart(product, amount);
+    console.log('wwww');
+    this.configService.addProductToShoppingCart(product, amount).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err.message);
+      }
+    );
   }
 }

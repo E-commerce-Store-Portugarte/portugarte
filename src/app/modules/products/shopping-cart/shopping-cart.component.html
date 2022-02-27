@@ -6,7 +6,7 @@
           <div class="hero-text-tablecell">
             <div class="container shopping-cart-container">
               <h2>Products on the Shopping Cart:</h2>
-              <div *ngFor="let basketItem of updatedShoppingCart$ | async">
+              <div *ngFor="let basketItem of shoppingCart$ | async">
                 <hr>
                 <strong>Produto: </strong>{{ basketItem.name}}
                 <br>
@@ -23,25 +23,18 @@
                   class="btn btn-warning"
                   (click)="updateShoppingCartItemAmount(basketItem.id, amount.value)"
                 >Editar quantidade de items</button>
-                <p></p>
                 <button
                   type="button"
                   class="btn btn-danger"
                   (click)="deleteItemFromShoppingCart(basketItem.id)"
                 >Delete Item</button>
-                <button
-                  type="button"
-                  routerLink="/checkout"
-                >Checkout</button>
               </div>
               <hr>
             </div>
-
             <button
               type="button"
-              (click)="resetBasketItem()"
-            >Limpar Carrinho</button>
-
+              routerLink="/paypal"
+            >Checkout</button>
           </div>
         </div>
       </div>

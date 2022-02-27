@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { merge, Observable, Subject, switchMap, tap } from 'rxjs';
+import { Component } from '@angular/core';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { ConfigService } from 'src/app/modules/services/config.service';
 
 @Component({
@@ -7,27 +7,15 @@ import { ConfigService } from 'src/app/modules/services/config.service';
   templateUrl: './shopping-cart.component.html',
   styleUrls: [],
 })
-export class ShoppingCartComponent implements OnInit {
-  initialShoppingCart$ = this.configService.getShoppingCartProducts();
-  shoppingCartSubject$ = new Subject();
-  updatedShoppingCartSubject$ = this.shoppingCartSubject$
+export class ShoppingCartComponent {
+  shoppingCartSubject$ = new BehaviorSubject<any>(
+    this.configService.getShoppingCartProducts()
+  );
+  shoppingCart$ = this.shoppingCartSubject$
     .asObservable()
     .pipe(switchMap(() => this.configService.getShoppingCartProducts()));
-  updatedShoppingCart$: Observable<any> = merge(
-    this.initialShoppingCart$,
-    this.updatedShoppingCartSubject$
-  );
 
   constructor(private configService: ConfigService) {}
-
-  ngOnInit(): void {}
-
-  deleteItemFromShoppingCart(id: any) {
-    this.configService
-      .deleteItemFromShoppingCart(id)
-      .pipe(tap(() => this.shoppingCartSubject$.next(true)))
-      .subscribe((data) => console.log(data));
-  }
 
   updateShoppingCartItemAmount(id: any, amount: any) {
     console.log('id:', id, 'amount:', amount);
@@ -35,10 +23,21 @@ export class ShoppingCartComponent implements OnInit {
     this.configService
       .updateShoppingCartItemAmount(id, amountNumber)
       .pipe(tap(() => this.shoppingCartSubject$.next(true)))
-      .subscribe((data) => console.log(data));
+      .subscribe({
+        next: (v) => console.log(v),
+        error: (v) => console.log(v),
+        complete: () => console.info('complete'),
+      });
   }
 
-  resetBasketItem() {
-    this.configService.resetBasketItem();
+  deleteItemFromShoppingCart(id: any) {
+    this.configService
+      .deleteItemFromShoppingCart(id)
+      .pipe(tap(() => this.shoppingCartSubject$.next(true)))
+      .subscribe({
+        next: (v) => console.log(v),
+        error: (v) => console.log(v),
+        complete: () => console.info('complete'),
+      });
   }
 }

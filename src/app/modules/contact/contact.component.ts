@@ -1,12 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+
+import { ConfigService } from '../services/config.service';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: [],
 })
-export class ContactComponent implements OnInit {
-  constructor() {}
+export class ContactComponent {
+  contactForm = new FormGroup({
+    name: new FormControl(),
+    message: new FormControl(),
+  });
 
-  ngOnInit() {}
+  constructor(private configService: ConfigService) {}
+
+  sendMessage() {
+    this.configService.sendMessage(this.contactForm.getRawValue()).subscribe({
+      next: (v: any) => console.log(v),
+    });
+  }
 }

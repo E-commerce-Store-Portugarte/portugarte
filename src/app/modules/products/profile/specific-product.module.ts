@@ -21,6 +21,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
   ],
-  declarations: [ShoppingCartComponent],
+  declarations: [ShoppingCartComponent, SpecificProductComponent],
 })
 export class SpecificProductModule {}

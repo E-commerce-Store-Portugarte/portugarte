@@ -1,6 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import axios from 'axios';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfigService } from 'src/app/modules/services/config.service';
 
@@ -10,7 +10,6 @@ import { ConfigService } from 'src/app/modules/services/config.service';
   styleUrls: [],
 })
 export class PaypalComponent implements OnInit {
-  authorization = 'Token 4ee8a9647d51d4dfe4641ff4180a7a5c7f9ccfdc';
   cartData: any = [];
   cartCount: any = 0;
   endPrice: any = 0;
@@ -27,22 +26,23 @@ export class PaypalComponent implements OnInit {
 
   constructor(
     private spinner: NgxSpinnerService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private http: HttpClient
   ) {}
 
-  rootUrl = this.configService.configUrlBasic;
+  rootUrl = this.configService.urlBasic;
 
   ngOnInit(): void {
-    axios
-      .get(this.configService.configUrlPost, {
-        headers: { Authorization: this.authorization },
-      })
-      .then((r) => {
-        this.cartData = r.data;
-        this.cartData.map((item: any) => {
-          this.endPrice += item.price;
-        });
-      });
+    this.http.get(this.configService.urlPost).subscribe({
+      next: (v) => {
+        (this.cartData = v),
+          this.cartData.map((item: any) => {
+            this.endPrice += item.price;
+          });
+      },
+      error: (errorMessage) => console.log(errorMessage),
+      complete: () => console.info('complete'),
+    });
   }
 
   handlePayPalButton = () => {
@@ -59,14 +59,15 @@ export class PaypalComponent implements OnInit {
         address: this.checkoutForm.value.addressLine,
         postcode: this.checkoutForm.value.postalCode,
       };
-      const headers = { Authorization: this.authorization };
-      axios
-        .post(this.configService.configUrlPaypalOrder, data, {
-          headers: headers,
-        })
-        .then((r) => {
-          window.location.href = r.data.redirect_url;
-        });
+
+      this.http.post(this.configService.urlPaypalOrder, data).subscribe({
+        next: (r) => {
+          const res: any = r;
+          window.location.href = res.redirect_url;
+        },
+        error: (v) => console.log(v),
+        complete: () => console.log('complete'),
+      });
     }
   };
 }

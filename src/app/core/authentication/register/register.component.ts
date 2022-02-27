@@ -10,6 +10,7 @@ import { ConfigService } from 'src/app/modules/services/config.service';
 export class RegisterComponent implements OnInit {
   productForm = new FormGroup({
     username: new FormControl(),
+    email: new FormControl(),
     password1: new FormControl(),
     password2: new FormControl(),
   });

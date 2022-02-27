@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,15 +11,16 @@ import { environment } from './../../../environments/environment';
   providedIn: 'root',
 })
 export class ConfigService {
-  configUrl = environment.apiUrl + '/api/v1/products/';
-  configUrlBasic = environment.apiUrl;
-  configUrlPost = environment.apiUrl + '/api/v1/basket-items/';
-  configUrlLogin = environment.apiUrl + '/rest-auth/login/';
-  configUrlCheckout = environment.apiUrl + '/api/v1/orders/';
-  configUrlRegistration = environment.apiUrl + '/rest-auth/registration/';
-  configUrlImage = environment.apiUrl + '/admin/api/v1/products/';
-  configUrlLoginAdmin = environment.apiUrl + '/admin/api/v1/login/';
-  configUrlPaypalOrder = environment.apiUrl + '/api/v1/paypal/orders/';
+  urlBasic = environment.apiUrl;
+  urlProducts = environment.apiUrl + '/api/v1/products/';
+  urlPost = environment.apiUrl + '/api/v1/basket-items/';
+  urlLogin = environment.apiUrl + '/rest-auth/login/';
+  urlCheckout = environment.apiUrl + '/api/v1/orders/';
+  urlRegistration = environment.apiUrl + '/rest-auth/registration/';
+  urlImage = environment.apiUrl + '/admin/api/v1/products/';
+  urlLoginAdmin = environment.apiUrl + '/admin/api/v1/login/';
+  urlPaypalOrder = environment.apiUrl + '/api/v1/paypal/orders/';
+  urlsendMessage = environment.apiUrl + '/api/v1/message/';
   configUpdateProduct = '';
   configDeleteProduct = '';
 
@@ -27,71 +28,43 @@ export class ConfigService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      // 'Content-Type':  'application/json',
-      Authorization: 'Token 4ee8a9647d51d4dfe4641ff4180a7a5c7f9ccfdc',
-    }),
-  };
-
-  // Index main page products methods
-
   getConfig(): Observable<any> {
-    return this.http.get(this.configUrl);
+    return this.http.get(this.urlProducts);
   }
-
-  // Profile product methods
 
   getSpecificConfig(id: string): Observable<Product> {
-    return this.http.get<Product>(this.configUrl + id);
+    return this.http.get<Product>(this.urlProducts + id);
   }
 
-  // Shopping Cart methods
-
   addProductToShoppingCart(product: any, amount: number) {
-    this.http
-      .post(
-        this.configUrlPost,
-        {
-          product_id: product,
-          amount: 1,
-        },
-        this.httpOptions
-      )
-      .subscribe(
-        (res) => {
-          console.log(res);
-        },
-        (err) => {
-          console.log(err.message);
-        }
-      );
+    const products = {
+      product_id: product,
+      amount: 1,
+    };
+    return this.http.post(this.urlPost, products);
   }
 
   getShoppingCartProducts(): Observable<any> {
-    return this.http.get(this.configUrlPost, this.httpOptions);
+    return this.http.get(this.urlPost);
   }
 
   deleteItemFromShoppingCart(id: any) {
-    return this.http.delete(this.configUrlPost + id + '/', this.httpOptions);
+    return this.http.delete(this.urlPost + id + '/');
   }
 
   updateShoppingCartItemAmount(id: any, amount: any) {
-    return this.http.put(
-      this.configUrlPost + id + '/',
-      {
-        amount: amount,
-      },
-      this.httpOptions
-    );
+    const amountObject = {
+      amount: amount,
+    };
+    return this.http.put(this.urlPost + id + '/', amountObject);
   }
 
   login(form: FormGroup) {
     this.http
-      .post(this.configUrlLogin, form, { withCredentials: true })
+      .post(this.urlLogin, form, { withCredentials: true })
       .subscribe((res: any) => {
         localStorage.setItem('token', res.key);
-        this.router.navigate(['navigation']);
+        this.router.navigate(['mercadinho']);
       }),
       (err: any) => {
         console.log(err);
@@ -100,7 +73,7 @@ export class ConfigService {
 
   loginUser(form: FormGroup) {
     this.http
-      .post(this.configUrlLogin, form, { withCredentials: true })
+      .post(this.urlLogin, form, { withCredentials: true })
       .subscribe((res: any) => {
         localStorage.setItem('token', res.key);
         this.router.navigate(['navigation']);
@@ -111,39 +84,30 @@ export class ConfigService {
   }
 
   submitProduct(form: any) {
-    this.http.post(this.configUrl, form, this.token);
+    this.http.post(this.urlProducts, form, this.token);
     this.router.navigate(['navigation']);
   }
 
   checkoutOrder(form: any) {
     console.log(this.token);
-    this.http.post(this.configUrlCheckout, form, this.httpOptions).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err.message);
-      }
-    );
+    this.http.post(this.urlCheckout, form).subscribe({
+      next: (v) => console.log(v),
+      error: (v) => console.log(v),
+      complete: () => console.info('complete'),
+    });
   }
 
   submitRegistration(form: any) {
-    this.http.post(this.configUrlRegistration, form).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err.message);
-      }
-    );
-  }
-
-  resetBasketItem() {
-    this.http.delete(this.configUrlPost);
+    console.log('LOGIN');
+    this.http.post(this.urlRegistration, form).subscribe({
+      next: (v) => console.log(v),
+      error: (v) => console.log(v),
+      complete: () => console.info('complete'),
+    });
   }
 
   uploadImage(form: FormData) {
-    this.http.post(this.configUrlImage, form, this.httpOptions).subscribe({
+    this.http.post(this.urlImage, form).subscribe({
       next: (v) => console.log(v),
       error: (v) => console.log(v),
       complete: () => console.info('complete'),
@@ -151,34 +115,29 @@ export class ConfigService {
   }
 
   getDataFromSpecificProduct(id: any): Observable<any> {
-    return this.http.get(this.configUrlImage + id, this.httpOptions);
+    return this.http.get(this.urlImage + id);
   }
 
   setIdForUrl(id: any) {
     this.configUpdateProduct =
-      this.configUrl + '/admin/api/v1/products/' + id + '/change/';
+      this.urlProducts + '/admin/api/v1/products/' + id + '/change/';
   }
 
   setIdToDeleteAndDeleteProduct(id: any) {
     this.configDeleteProduct =
-      this.configUrl + '/admin/api/v1/products/' + id + '/delete/';
-    return this.http.delete(this.configDeleteProduct, this.httpOptions);
+      this.urlProducts + '/admin/api/v1/products/' + id + '/delete/';
+    return this.http.delete(this.configDeleteProduct);
   }
 
   updateProducts(form: FormData) {
-    this.http.put(this.configUpdateProduct, form, this.httpOptions).subscribe({
+    this.http.put(this.configUpdateProduct, form).subscribe({
       next: (v) => console.log(v),
       error: (v) => console.log(v),
       complete: () => console.info('complete'),
     });
   }
 
-  dummy() {
-    return this.http.get('http://localhost:3000/posts/');
-  }
-
-  deleteDummy(id: any) {
-    console.log('ciao');
-    return this.http.delete('http://localhost:3000/posts/' + id);
+  sendMessage(message: FormData): Observable<any> {
+    return this.http.put(this.urlsendMessage, message);
   }
 }
