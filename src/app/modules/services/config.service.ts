@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Product } from '../products/products.model';
-import { environment } from './../../../environments/environment';
+import { environment } from './../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',

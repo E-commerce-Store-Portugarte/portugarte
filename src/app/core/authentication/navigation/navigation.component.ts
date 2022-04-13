@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { merge, Observable, Subject, switchMap, tap } from 'rxjs';
 import { ConfigService } from 'src/app/modules/services/config.service';
 
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-navigation',

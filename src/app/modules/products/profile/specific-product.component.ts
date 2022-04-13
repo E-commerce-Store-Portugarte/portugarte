@@ -5,7 +5,7 @@ import { Product } from 'src/app/modules/products/products.model';
 import { ConfigService } from 'src/app/modules/services/config.service';
 import Swal from 'sweetalert2';
 
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-specific-product',
