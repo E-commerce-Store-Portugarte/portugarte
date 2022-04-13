@@ -10,11 +10,11 @@
             <div class="card-deck responsive-list-div">
               <div
                 class="card bg-dark"
-                style="width: 18rem;"
+                style="width: 25rem;"
                 *ngFor="let product of arrayOfProducts$ | async"
               >
                 <img
-                  width="200px"
+                  width="50px"
                   height="200px"
                   class="card-img-top"
                   src="{{ product.image }}"
@@ -23,7 +23,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{ product.name }}</h5>
                   <p class="card-text"></p>
-                  <h6>{{ product.description }}</h6>
+                  <h6>{{ product.abbreviated_description }} ...</h6>
                   <input
                     class="btn btn-primary"
                     (click)="productProfile(product.id)"
@@ -32,10 +32,7 @@
                   >
                 </div>
               </div>
-
-
             </div>
-
           </div>
         </div>
       </div>

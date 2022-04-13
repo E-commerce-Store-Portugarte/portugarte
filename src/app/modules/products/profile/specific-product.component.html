@@ -15,17 +15,18 @@
                 <div class="card-body">
                   <img
                     src="{{ product.image }}"
+                    class="thumbnailProfile"
                     alt=""
                   >
                   <p class="card-text"></p>
-                  <h5>{{ product.description }}</h5>
+                  <h6>{{ product.description }}</h6>
                   <button
                     *ngIf="isLogged"
                     type="button"
                     class="btn btn-secondary btn-block"
                     (click)="addProductToShoppingCart(product.id, product.price); message(product.name)"
                   >
-                    <h6>Adicionar ao carrinho</h6>
+                    <h6>Adicionar {{ product.name }} ao carrinho : [ {{ product.price }} € ]</h6>
                   </button>
                   <p></p>
                   <button

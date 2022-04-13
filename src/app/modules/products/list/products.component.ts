@@ -10,7 +10,8 @@ import { environment } from '../../../../environments/environment';
   styleUrls: [],
 })
 export class ProductsComponent implements OnInit {
-  arrayOfProducts$: any = this.configService.getConfig();
+  arrayOfProducts$: any =
+    this.configService.getConfigWithAbbreviatedDescription();
   urlServer = environment.apiUrl;
 
   constructor(private configService: ConfigService, private router: Router) {}

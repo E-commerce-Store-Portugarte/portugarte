@@ -17,6 +17,7 @@
                   formControlName="username"
                   name="username"
                   class="form-control"
+                  required
                 >
               </div>
               <div class="form-group">
@@ -28,6 +29,7 @@
                   formControlName="email"
                   name="email"
                   class="form-control"
+                  required
                 >
               </div>
               <div class="form-group">
@@ -35,10 +37,11 @@
                   <h3>Password</h3>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   name="password1"
                   formControlName="password1"
                   class="form-control"
+                  required
                 >
               </div>
               <div class="form-group">
@@ -46,16 +49,18 @@
                   <h3>Password (confirmar)</h3>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   name="password2"
                   formControlName="password2"
                   class="form-control"
+                  required
                 >
               </div>
               <input
                 type="submit"
                 class="btn btn-primary"
                 value="Registar utilizador"
+                [disabled]="!productForm.valid"
               >
             </form>
           </div>

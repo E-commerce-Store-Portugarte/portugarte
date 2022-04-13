@@ -35,13 +35,13 @@ export class LoginComponent implements OnInit {
     this.configService
       .login(this.loginForm.getRawValue())
       .subscribe((res: any) => {
+        Swal.fire(
+          'Login efectuado com sucesso! Vais passar agora para o mercadinho!'
+        );
         localStorage.setItem('token', res.key);
         this.auth.setCurrentUser = localStorage.getItem('token');
         this.router.navigate(['mercadinho']);
         this.isLogged = true;
-        Swal.fire(
-          'Login efectuado com sucesso! Vais passar agora para o mercadinho!'
-        );
       }),
       (err: any) => {
         console.log(err);
@@ -49,8 +49,8 @@ export class LoginComponent implements OnInit {
   }
 
   logout() {
+    Swal.fire('Logout efectuado com sucesso!');
     localStorage.removeItem('token');
     this.isLogged = false;
-    Swal.fire('Logout efectuado com sucesso!');
   }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { environment } from './../../../environments/environment';
 export class ConfigService {
   urlBasic = environment.apiUrl;
   urlProducts = environment.apiUrl + '/api/v1/products/';
+  urlProductsHttpParams = environment.apiUrl + '/api/v1/products';
   urlPost = environment.apiUrl + '/api/v1/basket-items/';
   urlLogin = environment.apiUrl + '/rest-auth/login/';
   urlCheckout = environment.apiUrl + '/api/v1/orders/';
@@ -42,6 +43,14 @@ export class ConfigService {
 
   getConfig(): Observable<any> {
     return this.http.get(this.urlProducts);
+  }
+
+  getConfigWithAbbreviatedDescription(): Observable<any> {
+    const setParams = {
+      params: new HttpParams().set('abbreviation_length', 179),
+    };
+
+    return this.http.get(this.urlProductsHttpParams, setParams);
   }
 
   getSpecificConfig(id: string): Observable<Product> {
